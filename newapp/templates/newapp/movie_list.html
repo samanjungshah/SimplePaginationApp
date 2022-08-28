@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- listing Movies-->
+    <h1><u> Movie List</u> </h1>
+    {% for movies in movies  %}
+    <p>Name :  {{movies.name}}</p>
+    <p>Ratings: {{movies.rating}}</p>
+    <hr>
+    
+    
+    {% endfor %}
+    <!-- Conditional if for next,previous,last etc-->
+    {% if movies.has_previous and not movies.has_next %}
+        <a href="?page=1">First</a>
+        <a href="?page={{movies.previous_page_number}}">Previous</a>
+    
+    {% endif %}
+    <p>  
+    Page: {{movies.number}} of {{movies.paginator.num_pages}}
+
+    </p>
+    {% if movies.has_previous and movies.has_next%}
+        <a href="?page={{movies.next_page_number}}">Next</a>
+        <a href="?page={{movies.paginator.num_pages}}">Last</a>
+        <br> <br>
+        <a href="?page=1">First</a>
+        <a href="?page={{movies.previous_page_number}}">Previous</a>
+    {% endif %}
+    {% if movies.has_next  and not movies.has_previous %}
+        <a href="?page={{movies.next_page_number}}">Next</a>
+        <a href="?page={{movies.paginator.num_pages}}">Last</a>
+
+    {% endif %}
+</body>
+</html>
